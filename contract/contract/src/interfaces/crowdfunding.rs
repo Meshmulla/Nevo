@@ -133,4 +133,8 @@ pub trait CrowdfundingTrait {
         admin: Address,
         amount: i128,
     ) -> Result<(), CrowdfundingError>;
+
+    fn set_emergency_contact(env: Env, contact: Address) -> Result<(), CrowdfundingError>;
+
+    fn get_emergency_contact(env: Env) -> Result<Address, CrowdfundingError>;
 }

@@ -51,4 +51,5 @@ pub enum CrowdfundingError {
     PoolAlreadyClosed = 45,
     PoolNotDisbursedOrRefunded = 46,
     InvalidGoalUpdate = 47,
+    InsufficientFees = 47,
 }

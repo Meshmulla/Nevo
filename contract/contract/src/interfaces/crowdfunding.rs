@@ -86,6 +86,8 @@ pub trait CrowdfundingTrait {
 
     fn get_creation_fee(env: Env) -> Result<i128, CrowdfundingError>;
 
+    fn get_global_raised_total(env: Env) -> i128;
+
     fn initialize(
         env: Env,
         admin: Address,
@@ -121,4 +123,14 @@ pub trait CrowdfundingTrait {
     fn close_pool(env: Env, pool_id: u64, caller: Address) -> Result<(), CrowdfundingError>;
 
     fn is_closed(env: Env, pool_id: u64) -> Result<bool, CrowdfundingError>;
+
+    fn verify_cause(env: Env, cause: Address) -> Result<(), CrowdfundingError>;
+
+    fn is_cause_verified(env: Env, cause: Address) -> bool;
+
+    fn withdraw_platform_fees(
+        env: Env,
+        admin: Address,
+        amount: i128,
+    ) -> Result<(), CrowdfundingError>;
 }

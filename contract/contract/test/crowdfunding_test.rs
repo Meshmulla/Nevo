@@ -288,7 +288,14 @@ fn test_extend_campaign_deadline() {
     let goal = 1_000_000i128;
     let initial_deadline = env.ledger().timestamp() + 86400; // +1 day
 
-    client.create_campaign(&campaign_id, &title, &creator, &goal, &initial_deadline, &token_address);
+    client.create_campaign(
+        &campaign_id,
+        &title,
+        &creator,
+        &goal,
+        &initial_deadline,
+        &token_address,
+    );
 
     let new_deadline = env.ledger().timestamp() + 2 * 86400; // +2 days
 
@@ -320,7 +327,14 @@ fn test_extend_campaign_deadline_invalid_auth() {
     let goal = 1_000_000i128;
     let initial_deadline = env.ledger().timestamp() + 86400;
 
-    client.create_campaign(&campaign_id, &title, &creator, &goal, &initial_deadline, &token_address);
+    client.create_campaign(
+        &campaign_id,
+        &title,
+        &creator,
+        &goal,
+        &initial_deadline,
+        &token_address,
+    );
 
     let new_deadline = env.ledger().timestamp() + 2 * 86400;
 
@@ -339,7 +353,14 @@ fn test_extend_campaign_too_long() {
     let goal = 1_000_000i128;
     let initial_deadline = env.ledger().timestamp() + 86400;
 
-    client.create_campaign(&campaign_id, &title, &creator, &goal, &initial_deadline, &token_address);
+    client.create_campaign(
+        &campaign_id,
+        &title,
+        &creator,
+        &goal,
+        &initial_deadline,
+        &token_address,
+    );
 
     let new_deadline = env.ledger().timestamp() + 91 * 24 * 60 * 60; // 91 days
 

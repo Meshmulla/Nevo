@@ -435,7 +435,7 @@ impl CrowdfundingTrait for CrowdfundingContract {
         }
 
         let mut campaign = Self::get_campaign(env.clone(), campaign_id.clone())?;
-        
+
         // Must require creator's signature
         campaign.creator.require_auth();
 
@@ -445,14 +445,14 @@ impl CrowdfundingTrait for CrowdfundingContract {
         }
 
         let current_time = env.ledger().timestamp();
-        
+
         if new_deadline <= campaign.deadline {
             return Err(CrowdfundingError::InvalidDeadline);
         }
 
         // Extension must not exceed a maximum duration (e.g., 90 days total)
         // Ensure new deadline is not more than 90 days from current time
-        let max_duration = 90 * 24 * 60 * 60; 
+        let max_duration = 90 * 24 * 60 * 60;
         if new_deadline.saturating_sub(current_time) > max_duration {
             return Err(CrowdfundingError::InvalidDeadline);
         }

@@ -49,6 +49,11 @@ pub fn contract_unpaused(env: &Env, admin: Address, timestamp: u64) {
     env.events().publish(topics, timestamp);
 }
 
+pub fn admin_renounced(env: &Env, admin: Address) {
+    let topics = (Symbol::new(env, "admin_renounced"), admin);
+    env.events().publish(topics, ());
+}
+
 pub fn emergency_contact_updated(env: &Env, admin: Address, contact: Address) {
     let topics = (Symbol::new(env, "emergency_contact_updated"), admin);
     env.events().publish(topics, contact);
@@ -124,4 +129,14 @@ pub fn pool_closed(env: &Env, pool_id: u64, closed_by: Address, timestamp: u64) 
 pub fn platform_fees_withdrawn(env: &Env, admin: Address, amount: i128) {
     let topics = (Symbol::new(env, "platform_fees_withdrawn"), admin);
     env.events().publish(topics, amount);
+}
+
+pub fn address_blacklisted(env: &Env, admin: Address, address: Address) {
+    let topics = (Symbol::new(env, "address_blacklisted"), admin);
+    env.events().publish(topics, address);
+}
+
+pub fn address_unblacklisted(env: &Env, admin: Address, address: Address) {
+    let topics = (Symbol::new(env, "address_unblacklisted"), admin);
+    env.events().publish(topics, address);
 }

@@ -564,11 +564,11 @@ impl CrowdfundingTrait for CrowdfundingContract {
         }
 
         let contribution_key = StorageKey::Contribution(campaign_id.clone(), contributor.clone());
-        let existing_contribution: Contribution = env
-            .storage()
-            .instance()
-            .get(&contribution_key)
-            .ok_or(CrowdfundingError::NoContributionToRefund)?;
+        let existing_contribution: Contribution =
+            env.storage()
+                .instance()
+                .get(&contribution_key)
+                .ok_or(CrowdfundingError::NoContributionToRefund)?;
 
         let refund_amount = existing_contribution.amount;
         if refund_amount == 0 {

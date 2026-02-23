@@ -3520,7 +3520,10 @@ fn test_cancel_campaign() {
 
     // Verify it is cancelled
     let status = client.get_campaign_status(&campaign_id);
-    assert_eq!(status, crate::base::types::CampaignLifecycleStatus::Cancelled);
+    assert_eq!(
+        status,
+        crate::base::types::CampaignLifecycleStatus::Cancelled
+    );
 }
 
 #[test]

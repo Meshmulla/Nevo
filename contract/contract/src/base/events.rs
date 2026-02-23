@@ -69,12 +69,7 @@ pub fn campaign_cancelled(env: &Env, id: BytesN<32>) {
     env.events().publish(topics, ());
 }
 
-pub fn campaign_refunded(
-    env: &Env,
-    id: BytesN<32>,
-    contributor: Address,
-    amount: i128,
-) {
+pub fn campaign_refunded(env: &Env, id: BytesN<32>, contributor: Address, amount: i128) {
     let topics = (Symbol::new(env, "campaign_refunded"), id, contributor);
     env.events().publish(topics, amount);
 }

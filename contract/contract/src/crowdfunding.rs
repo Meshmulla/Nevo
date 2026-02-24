@@ -1532,7 +1532,6 @@ impl CrowdfundingTrait for CrowdfundingContract {
         String::from_str(&env, "1.2.0")
     }
 
- feature/pool-contributions-pagination
     fn get_pool_contributions_paginated(
         env: Env,
         pool_id: u64,
@@ -1545,7 +1544,7 @@ impl CrowdfundingTrait for CrowdfundingContract {
         if !env.storage().instance().has(&pool_key) {
             return Err(CrowdfundingError::PoolNotFound);
         }
- feature/pool-contributions-pagination
+
         // Get the list of contributors
         let contributors_key = StorageKey::PoolContributors(pool_id);
         let contributors: Vec<Address> = env

@@ -174,7 +174,6 @@ pub trait CrowdfundingTrait {
 
     fn get_contract_version(env: Env) -> String;
 
- feature/pool-contributions-pagination
     fn get_pool_contributions_paginated(
         env: Env,
         pool_id: u64,

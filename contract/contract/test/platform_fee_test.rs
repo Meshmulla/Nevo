@@ -212,26 +212,26 @@ fn test_calculate_platform_fee_realistic_pool_scenarios() {
     let scenarios = vec![
         Scenario {
             description: "Small community pool - $500 raised",
-            amount: 500_00, // $500 in cents
-            bps: 250,       // 2.5%
+            amount: 500_00,      // $500 in cents
+            bps: 250,            // 2.5%
             expected_fee: 12_50, // $12.50
         },
         Scenario {
             description: "Medium education fund - $5,000 raised",
-            amount: 5_000_00, // $5,000 in cents
-            bps: 250,         // 2.5%
+            amount: 5_000_00,     // $5,000 in cents
+            bps: 250,             // 2.5%
             expected_fee: 125_00, // $125
         },
         Scenario {
             description: "Large medical campaign - $50,000 raised",
-            amount: 50_000_00, // $50,000 in cents
-            bps: 250,          // 2.5%
+            amount: 50_000_00,      // $50,000 in cents
+            bps: 250,               // 2.5%
             expected_fee: 1_250_00, // $1,250
         },
         Scenario {
             description: "Mega disaster relief - $1,000,000 raised",
-            amount: 1_000_000_00, // $1,000,000 in cents
-            bps: 250,             // 2.5%
+            amount: 1_000_000_00,    // $1,000,000 in cents
+            bps: 250,                // 2.5%
             expected_fee: 25_000_00, // $25,000
         },
     ];

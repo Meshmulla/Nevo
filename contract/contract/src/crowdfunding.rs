@@ -50,7 +50,7 @@ impl CrowdfundingContract {
         // Use checked multiplication to prevent overflow
         // Formula: (amount * fee_bps) / 10,000
         let fee_bps_i128 = fee_bps as i128;
-        
+
         // Check for potential overflow before multiplication
         if amount > 0 && fee_bps_i128 > i128::MAX / amount {
             panic!("fee calculation would overflow");

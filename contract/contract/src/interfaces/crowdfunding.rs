@@ -183,4 +183,6 @@ pub trait CrowdfundingTrait {
         offset: u32,
         limit: u32,
     ) -> Result<Vec<PoolContribution>, CrowdfundingError>;
+
+    fn get_pool_remaining_time(env: Env, pool_id: u64) -> Result<u64, CrowdfundingError>;
 }

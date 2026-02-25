@@ -1,11 +1,14 @@
 #![cfg(test)]
 
-use soroban_sdk::{testutils::{Address as _, Ledger}, Address, Env, String};
+use soroban_sdk::{
+    testutils::{Address as _, Ledger},
+    Address, Env, String,
+};
 
 use crate::{
+    base::errors::CrowdfundingError,
     base::types::PoolConfig,
     crowdfunding::{CrowdfundingContract, CrowdfundingContractClient},
-    base::errors::CrowdfundingError,
 };
 
 fn setup_test(env: &Env) -> (CrowdfundingContractClient, Address, Address) {

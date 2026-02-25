@@ -2,7 +2,10 @@ use soroban_sdk::{Address, BytesN, Env, String, Vec};
 
 use crate::base::{
     errors::CrowdfundingError,
-    types::{CampaignDetails, CampaignLifecycleStatus, PoolConfig, PoolContribution, PoolMetadata, PoolState},
+    types::{
+        CampaignDetails, CampaignLifecycleStatus, PoolConfig, PoolContribution, PoolMetadata,
+        PoolState,
+    },
 };
 
 pub trait CrowdfundingTrait {
@@ -180,5 +183,4 @@ pub trait CrowdfundingTrait {
         offset: u32,
         limit: u32,
     ) -> Result<Vec<PoolContribution>, CrowdfundingError>;
-
 }

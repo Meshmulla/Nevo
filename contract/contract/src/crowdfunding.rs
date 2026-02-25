@@ -1529,7 +1529,7 @@ impl CrowdfundingTrait for CrowdfundingContract {
         limit: u32,
     ) -> Result<Vec<PoolContribution>, CrowdfundingError> {
         // Validate pool exist
-      // Check if pool exists 
+        // Check if pool exists
         let pool_key = StorageKey::Pool(pool_id);
         if !env.storage().instance().has(&pool_key) {
             return Err(CrowdfundingError::PoolNotFound);
@@ -1557,7 +1557,8 @@ impl CrowdfundingTrait for CrowdfundingContract {
         let mut result = Vec::new(&env);
         for i in offset..end {
             if let Some(contributor_addr) = contributors.get(i) {
-                let contribution_key = StorageKey::PoolContribution(pool_id, contributor_addr.clone());
+                let contribution_key =
+                    StorageKey::PoolContribution(pool_id, contributor_addr.clone());
                 if let Some(contribution) = env
                     .storage()
                     .instance()
@@ -1569,6 +1570,5 @@ impl CrowdfundingTrait for CrowdfundingContract {
         }
 
         Ok(result)
-
     }
 }

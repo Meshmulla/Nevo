@@ -17,7 +17,13 @@ fn create_token_contract<'a>(env: &Env, admin: &Address) -> token::StellarAssetC
     token::StellarAssetClient::new(env, &env.register_stellar_asset_contract_v2(admin.clone()))
 }
 
-fn setup_contract(env: &Env) -> (CrowdfundingContractClient, Address, token::StellarAssetClient) {
+fn setup_contract(
+    env: &Env,
+) -> (
+    CrowdfundingContractClient,
+    Address,
+    token::StellarAssetClient,
+) {
     let contract_id = env.register(CrowdfundingContract, ());
     let client = CrowdfundingContractClient::new(env, &contract_id);
 
@@ -60,7 +66,13 @@ fn test_get_pool_contributions_paginated_with_10_contributors() {
         token_client.mint(&contributor, &amount);
 
         // Contribute to the pool
-        client.contribute(&pool_id, &contributor, &token_client.address, &amount, &false);
+        client.contribute(
+            &pool_id,
+            &contributor,
+            &token_client.address,
+            &amount,
+            &false,
+        );
 
         contributors.push_back(contributor);
     }
@@ -161,9 +173,27 @@ fn test_get_pool_contributions_paginated_single_contributor_multiple_contributio
     let contributor = Address::generate(&env);
     token_client.mint(&contributor, &1_000_000);
 
-    client.contribute(&pool_id, &contributor, &token_client.address, &300_000, &false);
-    client.contribute(&pool_id, &contributor, &token_client.address, &400_000, &false);
-    client.contribute(&pool_id, &contributor, &token_client.address, &300_000, &false);
+    client.contribute(
+        &pool_id,
+        &contributor,
+        &token_client.address,
+        &300_000,
+        &false,
+    );
+    client.contribute(
+        &pool_id,
+        &contributor,
+        &token_client.address,
+        &400_000,
+        &false,
+    );
+    client.contribute(
+        &pool_id,
+        &contributor,
+        &token_client.address,
+        &300_000,
+        &false,
+    );
 
     // Should only have 1 entry (contributor appears once with total amount)
     let result = client.get_pool_contributions_paginated(&pool_id, &0, &10);

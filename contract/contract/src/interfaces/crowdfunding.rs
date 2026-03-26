@@ -74,6 +74,13 @@ pub trait CrowdfundingTrait {
         new_deadline: u64,
     ) -> Result<(), CrowdfundingError>;
 
+    fn claim_campaign_funds(env: Env, campaign_id: BytesN<32>) -> Result<(), CrowdfundingError>;
+
+    fn batch_claim_campaign_funds(
+        env: Env,
+        campaign_ids: Vec<BytesN<32>>,
+    ) -> Vec<Result<(), CrowdfundingError>>;
+
     fn get_campaign_fee_history(
         env: Env,
         campaign_id: BytesN<32>,
@@ -165,9 +172,13 @@ pub trait CrowdfundingTrait {
 
     fn is_cause_verified(env: Env, cause: Address) -> bool;
 
-    fn withdraw_platform_fees(
+    fn withdraw_platform_fees(env: Env, to: Address, amount: i128)
+        -> Result<(), CrowdfundingError>;
+
+    fn withdraw_event_fees(
         env: Env,
         admin: Address,
+        to: Address,
         amount: i128,
     ) -> Result<(), CrowdfundingError>;
 
@@ -186,21 +197,24 @@ pub trait CrowdfundingTrait {
 
     fn get_pool_remaining_time(env: Env, pool_id: u64) -> Result<u64, CrowdfundingError>;
 
-    fn create_event(
-        env: Env,
-        creator: Address,
-        title: String,
-        deadline: u64,
-        ticket_price: i128,
-        token_address: Address,
-    ) -> Result<u64, EventError>;
+    fn set_platform_fee_bps(env: Env, fee_bps: u32) -> Result<(), CrowdfundingError>;
 
+    fn get_platform_fee_bps(env: Env) -> Result<u32, CrowdfundingError>;
+
+    /// Purchase a ticket for a pool, splitting the payment between the event
+    /// pool and the platform fee pool using the current `PlatformFeeBps`.
+    ///
+    /// * `pool_id`  – target pool (must exist and be Active)
+    /// * `buyer`    – address paying for the ticket (requires auth)
+    /// * `asset`    – token used for payment
+    /// * `price`    – total ticket price (must be > 0)
     fn buy_ticket(
         env: Env,
-        event_id: u64,
+        pool_id: u64,
         buyer: Address,
-        ticket_type: TicketType,
-    ) -> Result<(), EventError>;
+        asset: Address,
+        price: i128,
+    ) -> Result<(i128, i128), CrowdfundingError>;
 
-    fn get_event(env: Env, event_id: u64) -> Result<Event, EventError>;
+    fn upgrade_contract(env: Env, new_wasm_hash: BytesN<32>) -> Result<(), CrowdfundingError>;
 }
